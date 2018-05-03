@@ -2,16 +2,15 @@ package pl.rpihome.rpiserver;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.rpihome.rpiserver.PI4J.SensorPhotoresistor;
+import pl.rpihome.rpiserver.PI4J.AnalogSensors;
 import pl.rpihome.rpiserver.PI4J.Sensors;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
 public class SensorsController {
     private Sensors sensors;
-    private SensorPhotoresistor sensorPhotoresistor;
+    private AnalogSensors analogSensors;
 
     @RequestMapping("/")
     public String greeting() {
@@ -40,13 +39,14 @@ public class SensorsController {
 
     @RequestMapping("/readLight")
     public int chuj3() {
-        sensorPhotoresistor = new SensorPhotoresistor();
-        return sensorPhotoresistor.Photoresistor();
+        analogSensors = new AnalogSensors();
+        return analogSensors.getValue(0);
     }
 
-    @RequestMapping("/readLight2")
+    @RequestMapping("/readTemperature")
     public int chuj4() {
-        return 5;
+        analogSensors = new AnalogSensors();
+        return analogSensors.getValue(1);
     }
 
 

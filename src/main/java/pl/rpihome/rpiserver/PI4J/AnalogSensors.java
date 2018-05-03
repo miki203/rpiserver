@@ -6,20 +6,20 @@ import com.pi4j.io.spi.SpiFactory;
 
 import java.io.IOException;
 
-public class SensorPhotoresistor {
+public class AnalogSensors {
 
     // SPI device
     public static SpiDevice spi = null;
     int conversion_value;
 
-    public int Photoresistor() {
+    public int getValue(int channel) {
 
          try {
             spi = SpiFactory.getInstance(SpiChannel.CS0,
                     SpiDevice.DEFAULT_SPI_SPEED, // default spi speed 1 MHz
                     SpiDevice.DEFAULT_SPI_MODE); // default spi mode 0
 
-                conversion_value = getConversionValue(0);
+                conversion_value = getConversionValue(channel);
             } catch (IOException e) {
                 e.printStackTrace();
             }
