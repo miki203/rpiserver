@@ -44,9 +44,12 @@ public class SensorsController {
     }
 
     @RequestMapping("/readTemperature")
-    public int chuj4() {
+    public double chuj4() {
         analogSensors = new AnalogSensors();
-        return analogSensors.getValue(1);
+        int odczyt = analogSensors.getValue(1);
+        double volt = (odczyt * 5.0) / 1024.0;
+        double temp = -((volt - 0.5) * 100);
+        return temp;
     }
 
 
