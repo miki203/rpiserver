@@ -7,6 +7,8 @@ import pl.rpihome.rpiserver.PI4J.Sensors;
 
 import java.util.HashMap;
 
+import static java.lang.Math.round;
+
 @RestController
 public class SensorsController {
     private Sensors sensors;
@@ -49,7 +51,7 @@ public class SensorsController {
         int odczyt = analogSensors.getValue(1);
         double volt = (odczyt * 5.0) / 1024.0;
         double temp = -((volt - 0.5) * 100);
-        return temp;
+        return round(temp);
     }
 
 
