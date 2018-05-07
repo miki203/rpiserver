@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.rpihome.rpiserver.PI4J.AnalogSensors;
 import pl.rpihome.rpiserver.PI4J.Sensors;
+import pl.rpihome.rpiserver.PI4J.StepperMotor;
 
 import java.util.HashMap;
 
@@ -54,5 +55,30 @@ public class SensorsController {
         return round(temp);
     }
 
+    @RequestMapping("/readHumidity")
+    public int chuj5() {
+        analogSensors = new AnalogSensors();
+        return analogSensors.getValue(2);
+    }
+
+    @RequestMapping("/stepperMotorUP")
+    public void chuj6() {
+        StepperMotor stepperMotor = new StepperMotor("up");
+        try {
+            stepperMotor.stepper();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/stepperMotorDOWN")
+    public void chuj7() {
+        StepperMotor stepperMotor = new StepperMotor("down");
+        try {
+            stepperMotor.stepper();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
