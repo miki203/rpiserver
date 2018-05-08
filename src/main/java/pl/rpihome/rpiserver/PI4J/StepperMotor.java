@@ -15,7 +15,7 @@ public class StepperMotor {
     }
 
     public void stepper() throws InterruptedException {
-        System.out.println("<--Pi4J--> GPIO Stepper Motor Example ... started.");
+        System.out.println("Stepper Motor started.");
 
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
@@ -53,15 +53,11 @@ public class StepperMotor {
         motor.setStepsPerRevolution(2038);
 
         if (up_down == "up") {
-            System.out.println("   Motor FORWARD for 5 seconds.");
+            System.out.println("   Motor FORWARD for 7 seconds.");
             motor.forward(7000);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
         } else if (up_down == "down") {
-            System.out.println("   Motor REVERSE for 5 seconds.");
+            System.out.println("   Motor REVERSE for 7 seconds.");
             motor.reverse(7000);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
         }
 
         // test motor control : ROTATE FORWARD with different timing and sequence
