@@ -52,12 +52,12 @@ public class StepperMotor {
         // This means is that there are really 32*63.683950617 steps per revolution =  2037.88641975 ~ 2038 steps!
         motor.setStepsPerRevolution(2038);
 
-        if (up_down == "up") {
-            System.out.println("   Motor FORWARD for 7 seconds.");
-            motor.forward(7000);
-        } else if (up_down == "down") {
-            System.out.println("   Motor REVERSE for 7 seconds.");
-            motor.reverse(7000);
+        if (up_down == "down") {
+            System.out.println("   Motor FORWARD for 2 seconds.");
+            motor.forward(2000);
+        } else if (up_down == "up") {
+            System.out.println("   Motor REVERSE for 2 seconds.");
+            motor.reverse(2000);
         }
 
         // test motor control : ROTATE FORWARD with different timing and sequence

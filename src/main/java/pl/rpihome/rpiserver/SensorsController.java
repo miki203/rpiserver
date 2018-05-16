@@ -14,6 +14,8 @@ import static java.lang.Math.round;
 public class SensorsController {
     private Sensors sensors;
     private AnalogSensors analogSensors;
+    private int BlindPosition = 5;
+    private Led led;
 
     @RequestMapping("/")
     public String greeting() {
@@ -69,6 +71,7 @@ public class SensorsController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        BlindPosition--;
     }
 
     @RequestMapping("/stepperMotorDOWN")
@@ -79,6 +82,22 @@ public class SensorsController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        BlindPosition++;
     }
 
+    @RequestMapping("/stepperMotorGetPosition")
+    public int chuj8() {
+        return BlindPosition;
+    }
+
+    @RequestMapping("/TurnOnLed")
+    public void chuj9() {
+        led = new Led();
+        led.TurnOn();
+    }
+
+    @RequestMapping("/TurnOffLed")
+    public void chuj10() {
+        led.TurnOff();
+    }
 }
