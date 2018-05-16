@@ -3,6 +3,7 @@ package pl.rpihome.rpiserver;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.rpihome.rpiserver.PI4J.AnalogSensors;
+import pl.rpihome.rpiserver.PI4J.Led;
 import pl.rpihome.rpiserver.PI4J.Sensors;
 import pl.rpihome.rpiserver.PI4J.StepperMotor;
 
@@ -92,12 +93,17 @@ public class SensorsController {
 
     @RequestMapping("/TurnOnLed")
     public void chuj9() {
-        led = new Led();
-        led.TurnOn();
+        if (led == null) {
+            led = new Led();
+            led.TurnOn();
+        }
     }
 
     @RequestMapping("/TurnOffLed")
     public void chuj10() {
-        led.TurnOff();
+        if (led != null) {
+            led.TurnOff();
+            led = null;
+        }
     }
 }

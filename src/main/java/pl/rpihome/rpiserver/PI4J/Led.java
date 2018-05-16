@@ -1,4 +1,4 @@
-package pl.rpihome.rpiserver;
+package pl.rpihome.rpiserver.PI4J;
 
 import com.pi4j.io.gpio.*;
 
