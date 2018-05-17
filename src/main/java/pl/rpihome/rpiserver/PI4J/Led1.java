@@ -2,7 +2,7 @@ package pl.rpihome.rpiserver.PI4J;
 
 import com.pi4j.io.gpio.*;
 
-public class Led {
+public class Led1 {
 
     GpioController gpio;
     GpioPinDigitalOutput ledPin;

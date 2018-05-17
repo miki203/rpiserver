@@ -10,11 +10,11 @@ import java.io.IOException;
 
 public class PirMotionDetection {
     private GpioPinDigitalInput pirMotionsensor;
-
+    final GpioController gpioPIRMotionSensor;
     public PirMotionDetection() {
         //Create gpio controller for PIR Motion Sensor listening on the pin GPIO_04
-        final GpioController gpioPIRMotionSensor = GpioFactory.getInstance();
-        pirMotionsensor = gpioPIRMotionSensor.provisionDigitalInputPin(RaspiPin.GPIO_15, PinPullResistance.PULL_DOWN);
+        gpioPIRMotionSensor = GpioFactory.getInstance();
+        pirMotionsensor = gpioPIRMotionSensor.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
 
     }
 
@@ -42,9 +42,12 @@ public class PirMotionDetection {
                 System.out.println("All is quiet...");
             }
         });
+
     }
 
     public void disableMotionSensor() {
+        gpioPIRMotionSensor.shutdown();
+        gpioPIRMotionSensor.unprovisionPin(pirMotionsensor);
         pirMotionsensor.removeAllListeners();
     }
 }

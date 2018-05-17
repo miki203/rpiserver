@@ -8,13 +8,8 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 public class StepperMotor {
-    private String up_down;
 
-    public StepperMotor(String up_down) {
-        this.up_down = up_down;
-    }
-
-    public void stepper() throws InterruptedException {
+    public void stepper(String up_down) {
         System.out.println("Stepper Motor started.");
 
         // create gpio controller

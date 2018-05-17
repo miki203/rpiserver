@@ -26,18 +26,6 @@ public class AnalogSensors {
         return conversion_value;
     }
 
-    /**
-     * Read data via SPI bus from MCP3002 chip.
-     * @throws IOException
-     */
-
-    /**
-     * Communicate to the ADC chip via SPI to get single-ended conversion value for a specified channel.
-     *
-     * @param channel analog input channel on ADC chip
-     * @return conversion value for specified analog input channel
-     * @throws IOException
-     */
     public static int getConversionValue(int channel) throws IOException {
 
         // create a data buffer and initialize a conversion request payload

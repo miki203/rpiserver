@@ -2,10 +2,7 @@ package pl.rpihome.rpiserver;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.rpihome.rpiserver.PI4J.AnalogSensors;
-import pl.rpihome.rpiserver.PI4J.Led;
-import pl.rpihome.rpiserver.PI4J.Sensors;
-import pl.rpihome.rpiserver.PI4J.StepperMotor;
+import pl.rpihome.rpiserver.PI4J.*;
 
 import java.util.HashMap;
 
@@ -16,7 +13,8 @@ public class SensorsController {
     private Sensors sensors;
     private AnalogSensors analogSensors;
     private int BlindPosition = 5;
-    private Led led;
+    private Led1 led1;
+    private Led2 led2;
 
     @RequestMapping("/")
     public String greeting() {
@@ -34,8 +32,10 @@ public class SensorsController {
 
     @RequestMapping("/enableMotionSensor")
     public void chuj1() {
-        if (sensors == null) sensors = new Sensors();
-        else sensors.enableMotionSensor();
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.enableMotionSensor();
+        } else sensors.enableMotionSensor();
     }
 
     @RequestMapping("/disableMotionSensor")
@@ -45,65 +45,86 @@ public class SensorsController {
 
     @RequestMapping("/readLight")
     public int chuj3() {
-        analogSensors = new AnalogSensors();
-        return analogSensors.getValue(0);
+        if (sensors == null) {
+            sensors = new Sensors();
+            return sensors.readLight();
+        } else return sensors.readLight();
     }
 
     @RequestMapping("/readTemperature")
-    public double chuj4() {
-        analogSensors = new AnalogSensors();
-        int odczyt = analogSensors.getValue(1);
-        double volt = (odczyt * 5.0) / 1024.0;
-        double temp = -((volt - 0.5) * 100);
-        return round(temp);
+    public int chuj4() {
+        if (sensors == null) {
+            sensors = new Sensors();
+            return sensors.readTemperature();
+        } else return sensors.readTemperature();
+        //        analogSensors = new AnalogSensors();
+//        int odczyt = analogSensors.getValue(1);
+//        double volt = (odczyt * 5.0) / 1024.0;
+//        double temp = -((volt - 0.5) * 100);
+//        return round(temp);
     }
 
     @RequestMapping("/readHumidity")
     public int chuj5() {
-        analogSensors = new AnalogSensors();
-        return analogSensors.getValue(2);
+        if (sensors == null) {
+            sensors = new Sensors();
+            return sensors.readHumidity();
+        } else return sensors.readHumidity();
     }
 
     @RequestMapping("/stepperMotorUP")
     public void chuj6() {
-        StepperMotor stepperMotor = new StepperMotor("up");
-        try {
-            stepperMotor.stepper();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        BlindPosition--;
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.stepperMotorUP();
+        } else sensors.stepperMotorUP();
     }
 
     @RequestMapping("/stepperMotorDOWN")
     public void chuj7() {
-        StepperMotor stepperMotor = new StepperMotor("down");
-        try {
-            stepperMotor.stepper();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        BlindPosition++;
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.stepperMotorDOWN();
+        } else sensors.stepperMotorDOWN();
     }
 
     @RequestMapping("/stepperMotorGetPosition")
     public int chuj8() {
-        return BlindPosition;
+        if (sensors == null) {
+            sensors = new Sensors();
+            return sensors.stepperMotorGetPosition();
+        } else return sensors.stepperMotorGetPosition();
     }
 
-    @RequestMapping("/TurnOnLed")
+    @RequestMapping("/TurnOnLed1")
     public void chuj9() {
-        if (led == null) {
-            led = new Led();
-            led.TurnOn();
-        }
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.TurnOnLed1();
+        } else sensors.TurnOnLed1();
     }
 
-    @RequestMapping("/TurnOffLed")
+    @RequestMapping("/TurnOffLed1")
     public void chuj10() {
-        if (led != null) {
-            led.TurnOff();
-            led = null;
-        }
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.TurnOffLed1();
+        } else sensors.TurnOffLed1();
+    }
+
+    @RequestMapping("/TurnOnLed2")
+    public void chuj11() {
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.TurnOnLed2();
+        } else sensors.TurnOnLed2();
+    }
+
+    @RequestMapping("/TurnOffLed2")
+    public void chuj12() {
+        if (sensors == null) {
+            sensors = new Sensors();
+            sensors.TurnOffLed2();
+        } else sensors.TurnOffLed2();
     }
 }
