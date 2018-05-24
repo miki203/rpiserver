@@ -6,15 +6,9 @@ import pl.rpihome.rpiserver.PI4J.*;
 
 import java.util.HashMap;
 
-import static java.lang.Math.round;
-
 @RestController
 public class SensorsController {
     private Sensors sensors;
-    private AnalogSensors analogSensors;
-    private int BlindPosition = 5;
-    private Led1 led1;
-    private Led2 led2;
 
     @RequestMapping("/")
     public String greeting() {
@@ -32,99 +26,204 @@ public class SensorsController {
 
     @RequestMapping("/enableMotionSensor")
     public void chuj1() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.enableMotionSensor();
-        } else sensors.enableMotionSensor();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.enableMotionSensor();
+            } else sensors.enableMotionSensor();
+        }).start();
     }
 
     @RequestMapping("/disableMotionSensor")
     public void chuj2() {
-        if (sensors != null) sensors.disableMotionSensor();
+        new Thread(() -> {
+            if (sensors != null) sensors.disableMotionSensor();
+        }).start();
     }
 
     @RequestMapping("/readLight")
     public int chuj3() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            return sensors.readLight();
-        } else return sensors.readLight();
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.readLight();
+            } else tmp[0] = sensors.readLight();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
     }
 
     @RequestMapping("/readTemperature")
     public int chuj4() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            return sensors.readTemperature();
-        } else return sensors.readTemperature();
-        //        analogSensors = new AnalogSensors();
-//        int odczyt = analogSensors.getValue(1);
-//        double volt = (odczyt * 5.0) / 1024.0;
-//        double temp = -((volt - 0.5) * 100);
-//        return round(temp);
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.readTemperature();
+            } else tmp[0] = sensors.readTemperature();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
     }
 
     @RequestMapping("/readHumidity")
     public int chuj5() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            return sensors.readHumidity();
-        } else return sensors.readHumidity();
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.readHumidity();
+            } else tmp[0] = sensors.readHumidity();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
     }
 
     @RequestMapping("/stepperMotorUP")
     public void chuj6() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.stepperMotorUP();
-        } else sensors.stepperMotorUP();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.stepperMotorUP();
+            } else sensors.stepperMotorUP();
+        }).start();
     }
 
     @RequestMapping("/stepperMotorDOWN")
     public void chuj7() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.stepperMotorDOWN();
-        } else sensors.stepperMotorDOWN();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.stepperMotorDOWN();
+            } else sensors.stepperMotorDOWN();
+        }).start();
     }
 
     @RequestMapping("/stepperMotorGetPosition")
     public int chuj8() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            return sensors.stepperMotorGetPosition();
-        } else return sensors.stepperMotorGetPosition();
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.stepperMotorGetPosition();
+            } else tmp[0] = sensors.stepperMotorGetPosition();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
     }
 
     @RequestMapping("/TurnOnLed1")
     public void chuj9() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.TurnOnLed1();
-        } else sensors.TurnOnLed1();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.TurnOnLed1();
+            } else sensors.TurnOnLed1();
+        }).start();
     }
 
     @RequestMapping("/TurnOffLed1")
     public void chuj10() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.TurnOffLed1();
-        } else sensors.TurnOffLed1();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.TurnOffLed1();
+            } else sensors.TurnOffLed1();
+        }).start();
     }
 
     @RequestMapping("/TurnOnLed2")
     public void chuj11() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.TurnOnLed2();
-        } else sensors.TurnOnLed2();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.TurnOnLed2();
+            } else sensors.TurnOnLed2();
+        }).start();
     }
 
     @RequestMapping("/TurnOffLed2")
     public void chuj12() {
-        if (sensors == null) {
-            sensors = new Sensors();
-            sensors.TurnOffLed2();
-        } else sensors.TurnOffLed2();
+        new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                sensors.TurnOffLed2();
+            } else sensors.TurnOffLed2();
+        }).start();
+    }
+
+    @RequestMapping("/GetMotonStatus")
+    public int chuj13() {
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.isMotionStatus();
+            } else tmp[0] = sensors.isMotionStatus();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
+    }
+
+    @RequestMapping("/GetLed1status")
+    public int chuj14() {
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.getLed1status();
+            } else tmp[0] =sensors.getLed1status();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
+    }
+
+    @RequestMapping("/GetLed2status")
+    public int chuj15() {
+        final int[] tmp = new int[1];
+        Thread thread = new Thread(() -> {
+            if (sensors == null) {
+                sensors = new Sensors();
+                tmp[0] = sensors.getLed2status();
+            } else tmp[0] =sensors.getLed2status();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return tmp[0];
     }
 }

@@ -1,6 +1,5 @@
 package pl.rpihome.rpiserver.PI4J;
 
-import org.springframework.stereotype.Component;
 import pl.rpihome.rpiserver.PI4J.MotionSensor.PirMotionDetection;
 
 public class Sensors {
@@ -10,6 +9,9 @@ public class Sensors {
     private Led1 led1;
     private Led2 led2;
     private StepperMotor stepperMotor;
+    private int motionStatus;
+    private int led1status;
+    private int led2status;
 
     public Sensors() {
         try {
@@ -17,19 +19,18 @@ public class Sensors {
             //   pirMotionDetection.detectMotionAndGlowLED();
             analogSensors = new AnalogSensors();
             stepperMotor = new StepperMotor();
-        } catch (UnsatisfiedLinkError e) {
+        } catch (UnsatisfiedLinkError | Exception e) {
             System.err.println("platform does not support this driver");
-        } catch (Exception e) {
-            System.err.println("platform does not support this driver");
-
         }
     }
 
     public void enableMotionSensor() {
+        motionStatus = 1;
         new Thread(() -> pirMotionDetection.detectMotionAndGlowLED()).start();
     }
 
     public void disableMotionSensor() {
+        motionStatus = 0;
         pirMotionDetection.disableMotionSensor();
     }
 
@@ -49,17 +50,17 @@ public class Sensors {
     }
 
     public void stepperMotorUP() {
-        new Thread(() -> {
-            stepperMotor.stepper("up");
-            BlindPosition--;
-        }).start();
+
+        stepperMotor.stepper("up");
+        BlindPosition--;
+
     }
 
     public void stepperMotorDOWN() {
-        new Thread(() -> {
-            stepperMotor.stepper("down");
-            BlindPosition++;
-        }).start();
+
+        stepperMotor.stepper("down");
+        BlindPosition++;
+
     }
 
     public int stepperMotorGetPosition() {
@@ -67,38 +68,54 @@ public class Sensors {
     }
 
     public void TurnOnLed1() {
-        new Thread(() -> {
-            if (led1 == null) {
-                led1 = new Led1();
-                led1.TurnOn();
-            }
-        }).start();
+
+        if (led1 == null) {
+            led1status = 1;
+            led1 = new Led1();
+            led1.TurnOn();
+        }
+
     }
 
     public void TurnOffLed1() {
-        new Thread(() -> {
-            if (led1 != null) {
-                led1.TurnOff();
-                led1 = null;
-            }
-        }).start();
+
+        if (led1 != null) {
+            led1status = 0;
+            led1.TurnOff();
+            led1 = null;
+        }
+
     }
 
     public void TurnOnLed2() {
-        new Thread(() -> {
-            if (led2 == null) {
-                led2 = new Led2();
-                led2.TurnOn();
-            }
-        }).start();
+
+        if (led1 == null) {
+            led2status = 1;
+            led2 = new Led2();
+            led2.TurnOn();
+        }
+
     }
 
     public void TurnOffLed2() {
-        new Thread(() -> {
-            if (led2 != null) {
-                led2.TurnOff();
-                led2 = null;
-            }
-        }).start();
+
+        if (led2 != null) {
+            led2status = 0;
+            led2.TurnOff();
+            led2=null;
+        }
+
+    }
+
+    public int isMotionStatus() {
+        return motionStatus;
+    }
+
+    public int getLed1status() {
+        return led1status;
+    }
+
+    public int getLed2status() {
+        return led2status;
     }
 }

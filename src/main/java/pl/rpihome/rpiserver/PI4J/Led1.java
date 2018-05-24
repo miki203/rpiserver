@@ -4,8 +4,8 @@ import com.pi4j.io.gpio.*;
 
 public class Led1 {
 
-    GpioController gpio;
-    GpioPinDigitalOutput ledPin;
+    private GpioController gpio;
+    private GpioPinDigitalOutput ledPin;
 
     public void TurnOn() {
         gpio = GpioFactory.getInstance();
@@ -17,4 +17,6 @@ public class Led1 {
         gpio.shutdown();
         gpio.unprovisionPin(ledPin);
     }
+
+
 }

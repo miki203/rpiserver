@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AnalogSensors {
 
     // SPI device
-    public static SpiDevice spi = null;
+    static SpiDevice spi = null;
     int conversion_value;
 
     public int getValue(int channel) {

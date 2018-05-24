@@ -4,8 +4,8 @@ import com.pi4j.io.gpio.*;
 
 public class Led2 {
 
-    GpioController gpio;
-    GpioPinDigitalOutput ledPin;
+    private GpioController gpio;
+    private GpioPinDigitalOutput ledPin;
 
     public void TurnOn() {
         gpio = GpioFactory.getInstance();
