@@ -6,8 +6,7 @@ public class Sensors {
     private PirMotionDetection pirMotionDetection;
     private AnalogSensors analogSensors;
     private int BlindPosition = 5;
-    private Led1 led1;
-    private Led2 led2;
+    private Led led;
     private StepperMotor stepperMotor;
     private int motionStatus;
     private int led1status;
@@ -67,44 +66,30 @@ public class Sensors {
         return BlindPosition;
     }
 
-    public void TurnOnLed1() {
+    public void ChangeOfStateLed1() {
 
-        if (led1 == null) {
+        if (led == null) {
+            led = new Led();
+            led.ChangeOfState(0);
+        } else led.ChangeOfState(0);
+
+        if (led1status == 0)
             led1status = 1;
-            led1 = new Led1();
-            led1.TurnOn();
-        }
-
-    }
-
-    public void TurnOffLed1() {
-
-        if (led1 != null) {
+        else if (led1status == 1)
             led1status = 0;
-            led1.TurnOff();
-            led1 = null;
-        }
-
     }
 
-    public void TurnOnLed2() {
+    public void ChangeOfStateLed2() {
 
-        if (led1 == null) {
+        if (led == null) {
+            led = new Led();
+            led.ChangeOfState(1);
+        } else led.ChangeOfState(1);
+
+        if (led2status == 0)
             led2status = 1;
-            led2 = new Led2();
-            led2.TurnOn();
-        }
-
-    }
-
-    public void TurnOffLed2() {
-
-        if (led2 != null) {
+        else if (led2status == 1)
             led2status = 0;
-            led2.TurnOff();
-            led2=null;
-        }
-
     }
 
     public int isMotionStatus() {

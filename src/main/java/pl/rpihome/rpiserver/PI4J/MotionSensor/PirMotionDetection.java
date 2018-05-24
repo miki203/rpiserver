@@ -46,8 +46,6 @@ public class PirMotionDetection {
     }
 
     public void disableMotionSensor() {
-        gpioPIRMotionSensor.shutdown();
-        gpioPIRMotionSensor.unprovisionPin(pirMotionsensor);
         pirMotionsensor.removeAllListeners();
     }
 }

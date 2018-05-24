@@ -133,43 +133,23 @@ public class SensorsController {
         return tmp[0];
     }
 
-    @RequestMapping("/TurnOnLed1")
+    @RequestMapping("/ChangeOfStateLed1")
     public void chuj9() {
         new Thread(() -> {
             if (sensors == null) {
                 sensors = new Sensors();
-                sensors.TurnOnLed1();
-            } else sensors.TurnOnLed1();
+                sensors.ChangeOfStateLed1();
+            } else sensors.ChangeOfStateLed1();
         }).start();
     }
 
-    @RequestMapping("/TurnOffLed1")
+    @RequestMapping("/ChangeOfStateLed2")
     public void chuj10() {
         new Thread(() -> {
             if (sensors == null) {
                 sensors = new Sensors();
-                sensors.TurnOffLed1();
-            } else sensors.TurnOffLed1();
-        }).start();
-    }
-
-    @RequestMapping("/TurnOnLed2")
-    public void chuj11() {
-        new Thread(() -> {
-            if (sensors == null) {
-                sensors = new Sensors();
-                sensors.TurnOnLed2();
-            } else sensors.TurnOnLed2();
-        }).start();
-    }
-
-    @RequestMapping("/TurnOffLed2")
-    public void chuj12() {
-        new Thread(() -> {
-            if (sensors == null) {
-                sensors = new Sensors();
-                sensors.TurnOffLed2();
-            } else sensors.TurnOffLed2();
+                sensors.ChangeOfStateLed2();
+            } else sensors.ChangeOfStateLed2();
         }).start();
     }
 
@@ -198,7 +178,7 @@ public class SensorsController {
             if (sensors == null) {
                 sensors = new Sensors();
                 tmp[0] = sensors.getLed1status();
-            } else tmp[0] =sensors.getLed1status();
+            } else tmp[0] = sensors.getLed1status();
         });
         thread.start();
         try {
@@ -216,7 +196,7 @@ public class SensorsController {
             if (sensors == null) {
                 sensors = new Sensors();
                 tmp[0] = sensors.getLed2status();
-            } else tmp[0] =sensors.getLed2status();
+            } else tmp[0] = sensors.getLed2status();
         });
         thread.start();
         try {
