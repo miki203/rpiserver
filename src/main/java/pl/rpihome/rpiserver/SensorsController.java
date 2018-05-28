@@ -153,7 +153,7 @@ public class SensorsController {
         }).start();
     }
 
-    @RequestMapping("/GetMotonStatus")
+    @RequestMapping("/GetMotionStatus")
     public int chuj13() {
         final int[] tmp = new int[1];
         Thread thread = new Thread(() -> {
@@ -206,4 +206,5 @@ public class SensorsController {
         }
         return tmp[0];
     }
+
 }

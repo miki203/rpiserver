@@ -25,7 +25,7 @@ public class Sensors {
 
     public void enableMotionSensor() {
         motionStatus = 1;
-        new Thread(() -> pirMotionDetection.detectMotionAndGlowLED()).start();
+        pirMotionDetection.detectMotionAndGlowLED();
     }
 
     public void disableMotionSensor() {
@@ -34,18 +34,22 @@ public class Sensors {
     }
 
     public int readLight() {
-        return analogSensors.getValue(0);
+        int odczytLight = analogSensors.getValue(0);
+        int procentReversed = odczytLight * 100 / 1023; // zakres 0-1023
+        return 100 - procentReversed;
     }
 
     public int readTemperature() {
-        int odczyt = analogSensors.getValue(1);
-        double volt = (odczyt * 5.0) / 1024.0;
+        int odczytTemp = analogSensors.getValue(1);
+        double volt = (odczytTemp * 5.0) / 1024.0;
         double temp = -((volt - 0.5) * 100);
         return (int) temp;
     }
 
     public int readHumidity() {
-        return analogSensors.getValue(2);
+        int odczytHum = analogSensors.getValue(2);
+        int procentReversed = odczytHum * 100 / 1023; // zakres 0-1023
+        return 100 - procentReversed; // zakres 0-1023
     }
 
     public void stepperMotorUP() {

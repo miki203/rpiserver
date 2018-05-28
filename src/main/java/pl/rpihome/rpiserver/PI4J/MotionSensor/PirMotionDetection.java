@@ -11,8 +11,9 @@ import java.io.IOException;
 public class PirMotionDetection {
     private GpioPinDigitalInput pirMotionsensor;
     final GpioController gpioPIRMotionSensor;
+
     public PirMotionDetection() {
-        //Create gpio controller for PIR Motion Sensor listening on the pin GPIO_04
+        //Create gpio controller for PIR Motion Sensor listening on the pin GPIO_07
         gpioPIRMotionSensor = GpioFactory.getInstance();
         pirMotionsensor = gpioPIRMotionSensor.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
 
