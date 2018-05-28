@@ -10,11 +10,11 @@ public class RpiserverApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RpiserverApplication.class, args);
-        try {
-            Process runtime = Runtime.getRuntime().exec("motion -n");
-            runtime.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Process runtime = Runtime.getRuntime().exec("motion -n");
+//            runtime.waitFor();
+//        } catch (IOException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }

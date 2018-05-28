@@ -7,10 +7,12 @@ import org.apache.tomcat.jni.Proc;
 import org.omg.SendingContext.RunTime;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.ZoneId;
 
 public class PirMotionDetection {
     private GpioPinDigitalInput pirMotionsensor;
-    final GpioController gpioPIRMotionSensor;
+    private final GpioController gpioPIRMotionSensor;
 
     public PirMotionDetection() {
         //Create gpio controller for PIR Motion Sensor listening on the pin GPIO_07
@@ -31,8 +33,10 @@ public class PirMotionDetection {
             //if the event state is High then print "Intruder Detected" and turn the LED ON by invoking the high() method
             if (event.getState().isHigh()) {
                 System.out.println("Intruder Detected!");
+                ZoneId zone = ZoneId.of("Europe/Berlin");
+                LocalTime now = LocalTime.now(zone);
                 try {
-                    Process runtime = Runtime.getRuntime().exec("raspistill -o plik.jpg");
+                    Process runtime = Runtime.getRuntime().exec("raspistill -o ./blackBoy/plik"+now+".jpg");
                     runtime.waitFor();
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
